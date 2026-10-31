@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de Taxis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🚕 Control de Taxis</h1>
+    <nav>
+      <button data-tab="viajes" class="active">Viajes</button>
+      <button data-tab="taxis">Taxis</button>
+      <button data-tab="conductores">Conductores</button>
+      <button data-tab="reportes">Reportes</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- VIAJES -->
+    <section id="tab-viajes" class="tab active">
+      <form id="form-viaje" class="card">
+        <h2>Nuevo viaje</h2>
+        <div class="grid">
+          <label>Cliente <input name="cliente" required></label>
+          <label>Teléfono <input name="telefono" type="tel"></label>
+          <label>Origen <input name="origen" required></label>
+          <label>Destino <input name="destino" required></label>
+          <label>Tarifa ($) <input name="tarifa" type="number" min="0" step="100" value="0"></label>
+        </div>
+        <button type="submit">Registrar viaje</button>
+      </form>
+
+      <div class="card">
+        <div class="row between">
+          <h2>Viajes</h2>
+          <select id="filtro-estado">
+            <option value="">Todos</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="asignado">Asignado</option>
+            <option value="en_curso">En curso</option>
+            <option value="finalizado">Finalizado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Cliente</th><th>Origen → Destino</th><th>Taxi / Conductor</th><th>Estado</th><th>Tarifa</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="tbody-viajes"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAXIS -->
+    <section id="tab-taxis" class="tab">
+      <form id="form-taxi" class="card">
+        <h2>Nuevo taxi</h2>
+        <div class="grid">
+          <label>Placa <input name="placa" required></label>
+          <label>Modelo <input name="modelo"></label>
+        </div>
+        <button type="submit">Agregar taxi</button>
+      </form>
+      <div class="card">
+        <h2>Flota</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Placa</th><th>Modelo</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="tbody-taxis"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONDUCTORES -->
+    <section id="tab-conductores" class="tab">
+      <form id="form-conductor" class="card">
+        <h2>Nuevo conductor</h2>
+        <div class="grid">
+          <label>Nombre <input name="nombre" required></label>
+          <label>Documento <input name="documento" required></label>
+          <label>Teléfono <input name="telefono" type="tel"></label>
+        </div>
+        <button type="submit">Agregar conductor</button>
+      </form>
+      <div class="card">
+        <h2>Conductores</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nombre</th><th>Documento</th><th>Teléfono</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="tbody-conductores"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORTES -->
+    <section id="tab-reportes" class="tab">
+      <div class="card">
+        <h2>Resumen</h2>
+        <div class="stats" id="stats"></div>
+      </div>
+      <div class="card">
+        <h2>Ingresos por conductor (viajes finalizados)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Conductor</th><th>Viajes</th><th>Total ($)</th></tr></thead>
+            <tbody id="tbody-reportes"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
